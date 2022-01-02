@@ -1,18 +1,12 @@
 categories:
   - name: Default
     icon: bars
-  - name: Expressions
-    icon: code
-  - name: Queries
-    icon: flask
-  - name: Ansible
-    icon: atom
-  - name: AWX
-    icon: magic
-  - name: Demo
-    icon: heart
-  - name: Maintenance
-    icon: cogs
+  - name: Dataset
+    icon: bath
+  - name: Create
+    icon: bath  
+  - name: Clone
+    icon: bath             
 roles:
   - name: admin
     groups:
@@ -26,532 +20,120 @@ roles:
       - local/demo
   - name: public
     groups: []
+  - name: DataOps
+    groups:
+      - local/DataOps Admins  
 forms:
-  - name: Demo Form Ansible No input
+  - name: Create new dataset 
     help: |
-      This demo is to show the execution of an ansible playbook.
-      The playbook `dummy.yaml` in this case.
-      ```
-        playbook: dummy.yaml
-        inventory: ""
-        type: ansible
-      ```
-    image: data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNDY0cHgiIGhlaWdodD0iNDU3Ljg1MnB4IiB2aWV3Qm94PSIyNCAyNy4wNzEgNDY0IDQ1Ny44NTIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMjQgMjcuMDcxIDQ2NCA0NTcuODUyIg0KCSB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGZpbGw9IiNFRDFDMjQiIGQ9Ik00NjQsODhIMzEyVjUxLjA3OGMwLTcuMTEyLTMuMTMtMTMuODIzLTguNTc4LTE4LjM5MWMtNC4wODYtMy40MzMtOS4xMjEtNS4zNjctMTQuMzQ0LTUuNTk0DQoJCWMtMS43NC0wLjA3Ni0zLjQ5NiwwLjAyOS01LjI1LDAuMzQ0TDUwLjQzNyw2OC42MjVDMzUuMTE4LDcxLjMyOSwyNCw4NC41OCwyNCwxMDAuMTQxdjMxMS43MzRjMCwxNS41NTIsMTEuMTE4LDI4LjgwNCwyNi40MzgsMzEuNQ0KCQlsMjMzLjM5MSw0MS4xODhjMS4zOTMsMC4yNDcsMi43OTYsMC4zNTksNC4xODgsMC4zNTljNS42MDEsMCwxMS4wNDctMS45NDYsMTUuNDA2LTUuNjA5YzUuNDQ4LTQuNTY4LDguNTc4LTExLjI3OSw4LjU3OC0xOC4zOTENCgkJVjQyNGgxNTJjMTMuMjMyLDAsMjQtMTAuNzY5LDI0LTI0VjExMkM0ODgsOTguNzY4LDQ3Ny4yMzIsODgsNDY0LDg4eiBNMjk2LDQ2MC45MjJjMCwzLjIzOS0xLjc5NSw1LjI0NC0yLjg1OSw2LjE0MQ0KCQljLTEuMDYzLDAuODk2LTMuMzIzLDIuMzAyLTYuNTMxLDEuNzVMNTMuMjE5LDQyNy42MjVDNDUuNTYzLDQyNi4yNzMsNDAsNDE5LjY0NCw0MCw0MTEuODZWMTAwLjE0MQ0KCQljMC03Ljc4NCw1LjU2My0xNC40MTQsMTMuMjE5LTE1Ljc2NmwyMzMuMzc1LTQxLjE4OGMwLjgwMy0wLjEzNCwxLjU1NS0wLjE0NywyLjIzNC0wLjA3OGMyLjA0LDAuMjA3LDMuNTE1LDEuMTY1LDQuMzEzLDEuODQ0DQoJCWMxLjA3MiwwLjg4LDIuODU5LDIuODg1LDIuODU5LDYuMTI1VjQ2MC45MjJ6IE00NzIsNDAwYzAsNC40MTYtMy41OTIsOC04LDhoLTg4aC02NFYxMDRoNjRoODhjNC40MDgsMCw4LDMuNTg0LDgsOFY0MDB6Ii8+DQoJPHBhdGggZmlsbD0iI0VEMUMyNCIgZD0iTTM0NCwxNDRjLTQuNDE1LDAtOCwzLjU3Ni04LDh2ODhjMCw0LjQyNCwzLjU4NSw4LDgsOGg4OGM0LjQxNiwwLDgtMy41NzYsOC04di0zMmMwLTQuNDI0LTMuNTg0LTgtOC04DQoJCWMtNC40MTUsMC04LDMuNTc2LTgsOHYyNGgtNzJ2LTcyaDQwYzQuNDE2LDAsOC0zLjU3Niw4LThzLTMuNTg0LTgtOC04SDM0NHoiLz4NCgk8cGF0aCBmaWxsPSIjRUQxQzI0IiBkPSJNNDQwLDE0NGMtMi4wNDYsMC00LjA5MiwwLjc3OS01LjY1NiwyLjM0NEwzOTIsMTg4LjY4OGwtMTAuMzQ0LTEwLjM0NGMtMy4xMjgtMy4xMjgtOC4xODQtMy4xMjgtMTEuMzEzLDANCgkJYy0zLjEyOCwzLjEyOC0zLjEyOCw4LjE4NSwwLDExLjMxM2wxNiwxNmMxLjU2MSwxLjU2LDMuNjA4LDIuMzQ0LDUuNjU2LDIuMzQ0YzIuMDQ5LDAsNC4wOTctMC43ODQsNS42NTYtMi4zNDRsNDgtNDgNCgkJYzMuMTI5LTMuMTI4LDMuMTI5LTguMTg1LDAtMTEuMzEzQzQ0NC4wOTMsMTQ0Ljc4LDQ0Mi4wNDcsMTQ0LDQ0MCwxNDR6Ii8+DQoJPHBhdGggZmlsbD0iI0VEMUMyNCIgZD0iTTQzMiwyNjRoLTg4Yy00LjQxNSwwLTgsMy41NzYtOCw4djMyYzAsNC40MjQsMy41ODUsOCw4LDhoODhjNC40MTYsMCw4LTMuNTc2LDgtOHYtMzINCgkJQzQ0MCwyNjcuNTc2LDQzNi40MTYsMjY0LDQzMiwyNjR6IE00MjQsMjk2aC03MnYtMTZoNzJWMjk2eiIvPg0KCTxwYXRoIGZpbGw9IiNFRDFDMjQiIGQ9Ik00MzIsMzI4aC04OGMtNC40MTUsMC04LDMuNTc2LTgsOHYzMmMwLDQuNDI0LDMuNTg1LDgsOCw4aDg4YzQuNDE2LDAsOC0zLjU3Niw4LTh2LTMyDQoJCUM0NDAsMzMxLjU3Niw0MzYuNDE2LDMyOCw0MzIsMzI4eiBNNDI0LDM2MGgtNzJ2LTE2aDcyVjM2MHoiLz4NCgk8cGF0aCBmaWxsPSIjRUQxQzI0IiBkPSJNMTcxLjU2NywxNzYuODk5bDU0LjczMSwxMzUuMDgybC04Mi42NzEtNjUuMTE5TDE3MS41NjcsMTc2Ljg5OXogTTI2OC43OTUsMzQzLjA5OWwtODQuMTg3LTIwMi42MDMNCgkJYy0yLjQwMi01Ljg0My03LjIxLTguOTM1LTEzLjA0Mi04LjkzNWMtNS44NDMsMC0xMC45OTgsMy4wOTEtMTMuNDAyLDguOTM1TDY1Ljc2MywzNjIuNzI3aDMxLjYwOUwxMzMuOTUsMjcxLjFsMTA5LjE1NSw4OC4xODQNCgkJYzQuMzkxLDMuNTUyLDcuNTU4LDUuMTU2LDExLjY3Nyw1LjE1NmM4LjI0NywwLDE1LjQ1NC02LjE4MSwxNS40NTQtMTUuMTA0QzI3MC4yMzYsMzQ3Ljg4MSwyNjkuNzIyLDM0NS41NzUsMjY4Ljc5NSwzNDMuMDk5DQoJCUwyNjguNzk1LDM0My4wOTl6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==
+      This is used to create new dataset in the FZ-DEV. The new dataset will be mounted under /data/{aud,eng,nlp,vis}/datasets  
     roles:
-      - public
-    description: This workflow will kickoff the vanilla ansible dummy playbook.
+      - DataOps
+    description: New dataset creation 
     categories:
-      - Demo
-      - Ansible
-    tileClass: has-background-warning-light
-    playbook: dummy.yaml
-    inventory: ""
-    type: ansible
-    fields: []
-  - name: Demo Form Functionality Expressions
-    help: |
-      This demo shows the power of expression fields.  Expression fields have a **javascript** expression that is evaluated.
-      The expression allows the use of **placeholders** in the form of `$(field)`.
-      This placeholder is replaced by the value of another field.
-      This way we can do naming conventions by concatenating strings or calculating numbers.
-      ```
-         expression: "'$(textfield1)' + ' ' + '$(textfield2)' + $(multiply)"
-         expression: $(numberfield)*100
-      ```
-      The last field has the expression `Math.PI`, so you can use everthing javascript can offer.
-    roles:
-      - public
-    description: This workflow will show expressions
-    categories:
-      - Demo
-      - Expressions
-    tileClass: has-background-warning-light
+      - Dataset
+      - Create
+    #tileClass: has-background-link
     icon: scroll
-    playbook: dummy.yaml
-    inventory: ""
+    playbook: dataops_create_vol.yaml
+    inventory: hosts
     type: ansible
-    fields:
-      - type: text
-        name: textfield1
-        label: Field 1
-        default: ""
-        required: true
-        minLength: 4
-        maxLength: 10
-      - type: text
-        name: textfield2
-        label: Field 2
-        default: ""
-        required: true
-        minLength: 4
-        maxLength: 10
+    fields:   
       - type: expression
-        hide: false
-        name: concatination
-        default: ""
-        label: Concatination Example
-        expression: "'$(textfield1)' + ' ' + '$(textfield2)' + $(multiply)"
-      - type: number
-        name: numberfield
-        label: Number
-        default: "1"
-        required: true
-        minValue: 0
-        maxValue: 10
-      - type: expression
-        hide: false
-        name: multiply
-        default: ""
-        label: Multiply Example
-        expression: $(numberfield)*100
-      - type: expression
-        hide: false
-        name: pi
-        default: ""
-        label: The number PI
-        expression: Math.PI
-  - name: Demo Form Functionality Simple Fields
-    help: |
-      This demo shows the use of simple form fields, like `text`, `number`, `password`,`enum`,`radio` and `checkbox`.
-      Note that we can use regular expressions to validate, as well as default validations (depending on the fieldtype) such as `required`, `minValue`, `maxValue`, `minLength` and `maxLength`<br>
-      ```
-        - type: text
-          name: username
-          label: Username
-          default: ansibleguy
-          placeholder: type a username
-          required: true
-          minLength: 4
-          maxLength: 10
-          regex: ^[a-zA-Z]*$
-          regexDescription: Must be alpha numeric
-          icon: user
-      ```
-    roles:
-      - public
-    description: This workflow will show form field examples
-    categories:
-      - Demo
-    tileClass: has-background-warning-light
-    icon: comment
-    playbook: dummy.yaml
-    inventory: ""
-    type: ansible
-    fields:
-      - type: text
-        name: username
-        label: Username
-        default: ansibleguy
-        placeholder: type a username
-        required: true
-        minLength: 4
-        maxLength: 10
-        regex: ^[a-zA-Z]*$
-        regexDescription: Must be alpha numeric
-        icon: user
-      - type: password
-        name: password
-        label: Password
-        default: ""
-        required: true
-        minLength: 8
-        maxLength: 20
-        regex: ^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])
-        regexDescription: Must contain at least 1 numeric, 1 special, 1 upper and 1 lower character
-        icon: lock
-      - type: password
-        name: password_verify
-        label: Verify Password
-        default: ""
-        sameAs: password
-        icon: lock
-      - type: number
-        name: numberfield
-        label: Number
-        default: "1"
-        required: true
-        minValue: 0
-        maxValue: 10
-      - type: table
-        name: member
-        label: Add club members
-        required: true
-        tableFields:
-        - name: firstname
-          label: First Name
-          type: text
-          required: true
-          default: ''
-          minLength: 2
-          regex: '[a-zA-Z]*'
-          regexDescription: Must be normal characters
-          icon: user
-        - name: lastname
-          label: Last Name
-          type: text
-          required: true
-          default: ''
-          minLength: 5
-        - name: age
-          label: How old ?
-          type: number
-          required: true
-          default: 12
-          minValue: 12
-          maxValue: 80
-        - type: enum
-          name: food
-          label: Favorite food
-          default: veggies
-          values:
-            - pasta
-            - pizza
-            - fries
-            - steak
-            - veggies
-        - name: paid
-          label: membership
-          placeholder: Paid yet ?
-          type: checkbox
-          required: true
-          default: true
-      - type: enum
-        name: country
-        model: country.name
-        label: Country
-        default: belgium
-        values:
-          - belgium
-          - netherlands
-        required: true
-      - type: enum
-        name: languages
-        label: Languages
-        model: country.languages
-        default: []
-        values:
-          - english
-          - dutch
-          - french
-          - spanish
-          - german
-          - swedish
-          - chinese
-        multiple: true
-        size: 4
-        required: true
-        icon: flag
-        help: You can select multiple languages if you want !
-      - type: radio
-        name: linuxfavourite
-        label: Choose your favorite linux flavour
-        values:
-          - CentOS
-          - Ubuntu
-          - Red Hat
-          - Debian
-        default: CentOS
-        required: true
-      - type: checkbox
-        name: areyousure
-        label: Confirmation
-        default: false
-        placeholder: are you sure?
-  - name: Groups and dependencies
-    help: |
-      This demo shows how you can create dependencies between fields (**try the checkbox**) and how you can group fields together visually.
-      ```
-        - type: text
-          name: myname
-          label: Type a name
-          required: true
-          group: Let's do it
-          dependencies:
-            - name: areyousure
-              values:
-                - true
-      ```
-    roles:
-      - public
-    description: This workflow will show groups and dependencies
-    categories:
-      - Demo
-    tileClass: has-background-warning-light
-    icon: link
-    playbook: dummy.yaml
-    inventory: ""
-    type: ansible
-    fields:
-      - type: checkbox
-        name: areyousure
-        label: Are you sure ?
-        default: false
-      - type: text
-        name: myname
-        label: Type a name
-        required: true
-        group: Let's do it
-        dependencies:
-          - name: areyousure
-            values:
-              - true
-      - type: text
-        name: description
-        label: Type a description
-        required: true
-        dependencies:
-          - name: areyousure
-            values:
-              - true
-        group: Let's do it
-  - name: Query options
-    help: |
-      This demo shows the possibilities of the query field (**dropdown box**).
-      In this case we use a javascript expression to acquire data.
-
-      As a matter of fact, we read our very own `forms.yaml` file.
-      To accomplish this, we use our javascript function `fn.fnReadYamlFile()`
-      We also have a `fn.fnReadJsonFile()`
-
-      ### The 4 parameters of fn.fnReadYamlFile() are :
-       | attribute     | description                              | required | optional | more info                                                                                                     |
-       |---------------|------------------------------------------|----------|----------|---------------------------------------------------------------------------------------------------------------|
-       | path          | /path/of/file.yaml                       | yes      |          |                                                                                                               |
-       | json query    | a json query to transform the result     |          | yes      | [https://www.jsonquerytool.com/](https://www.jsonquerytool.com/)                                                                              |
-       | sort function | a javascript sort function               |          | yes      | [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
-       | map function  | a javascript map function                |          | yes      | [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)  |
-
-      ```
-         expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[].name]')
-      ```
-    roles:
-      - public
-    description: This shows all the query options and combinations.
-    categories:
-      - Demo
-      - Queries
-    tileClass: has-background-warning-light
-    playbook: dummy.yaml
-    inventory: ""
-    type: ansible
-    fields:
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[].name]')
-        name: forms0
-        multiple: false
-        default: __none__
-        label: Simple one column select
-        icon: building
-        placeholder: Select a form
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms1
-        multiple: false
-        default: __none__
-        label: Multiple columns
-        icon: building
-        columns:
-          - name
-          - type
-        valueColumn: name
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms2
-        multiple: false
-        label: Autoselect first item
-        default: __auto__
-        icon: building
-        columns:
-          - name
-          - type
-        valueColumn: name
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms3
-        multiple: false
-        label: Required field
-        default: __none__
-        required: true
-        icon: building
-        columns:
-          - name
-          - type
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms4
-        multiple: false
-        outputObject: true
-        label: Object output
-        default: __none__
-        required: false
-        icon: building
-        columns:
-          - name
-          - type
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms5
-        multiple: true
-        label: Select multiple, flattened output
-        default: __none__
-        required: false
-        icon: building
-        columns:
-          - name
-          - type
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms6
-        multiple: true
-        outputObject: true
-        label: Select multiple, object output
-        default: __none__
-        required: false
-        icon: building
-        columns:
-          - name
-          - type
-      - type: query
-        expression: fn.fnReadYamlFile('/app/dist/persistent/forms.yaml','[.forms[]]')
-        name: forms7
-        multiple: true
-        outputObject: true
-        label: Specific default
-        default: HelloWorld
-        required: false
-        icon: building
-        columns:
-          - name
-          - type
-  - name: Expression Queries
-    help: >
-      This demo grabs information, using rest, directly from the internet.
-      [https://gorest.co.in/public/v1/users](https://gorest.co.in/public/v1/users).
-
-      To accomplish this, we use our javascript function `fn.fnRestBasic()`
-
-      ### The 6 parameters of fn.fnRestBasic() are :
-       | attribute     | description                              | required | optional | more info                                                                                                     |
-       |---------------|------------------------------------------|----------|----------|---------------------------------------------------------------------------------------------------------------|
-       | method        | get \| put \| post \| delete             | yes      |          |                                                                                                               |
-       | url           | https://rest/api/v1/...                  | yes      |          |                                                                                                               |
-       | body          | json-body with post and put              |          | yes      |                                                                                                               |
-       | credential    | named credential (added to ansibleforms) |          | yes      |                                                                                                               |
-       | json query    | a json query to transform the result     |          | yes      | [https://www.jsonquerytool.com/](https://www.jsonquerytool.com/)                                                                              |
-       | sort function | a javascript sort function               |          | yes      | [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
-       | map function  | a javascript map function                |          | yes      | [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)  |
-
-       ```
-        - type: query
-          name: user
-          label: Users
-          expression: fn.fnRestBasic('get','https://gorest.co.in/public/v1/users','','','[.data[]]')
-          columns:
-            - name
-            - email
-       ```
-    roles:
-      - public
-    description: An example of the power of expression based queries
-    categories:
-      - Demo
-      - Expressions
-      - Queries
-    tileClass: has-background-warning-light
-    playbook: dummy.yaml
-    inventory: ""
-    type: ansible
-    fields:
-      - type: query
-        name: user
-        label: Users
-        default: __auto__
-        required: true
-        outputObject: true
-        multiple: false
-        expression: fn.fnRestBasic('get','https://gorest.co.in/public/v1/users','','','[.data[]]')
-        columns:
-          - name
-          - email
-        valueColumn: id
-        previewColumn: name
-  - name: HelloWorld
-    help: |
-      This form starts the template `HelloWorld` on AWX.
-
-      To make this work, you need an AWX installed with the `HelloWorld` project imported.
-      In the `settings`-menu on AnsibleForms, add the AWX connection.
-    roles:
-      - demo
-    description: This will kick off the HelloWorld template in AWX.  You can have it
-      installed on AWX from github.  It does not expect any variables, so that's
-      cool because it should always run :)
-    icon: smile-wink
-    categories:
-      - Demo
-      - AWX
-    tileClass: has-background-success-light
-    template: HelloWorld
-    inventory: ""
-    type: awx
-    fields:
-      - model: hello.world
-        type: text
-        name: Testfield
-        label: Testfield
-        default: ""
-        required: true
-  - name: Backup Ansibleforms
-    help: |
-      This form starts the `ansibleforms_backup.yaml` playbook
-
-      It will make a backup of the `mysql database` as well as `forms.yaml` file
-    roles:
-      - admin
-    description: This will make a backup of the ansibleforms database and forms.yaml file.
-    icon: save
-    categories:
-      - Demo
-      - Ansible
-      - Maintenance
-    tileClass: has-background-info-light
-    playbook: ansibleforms_backup.yaml
-    type: ansible
-    fields:
-      - type: expression
-        name: persistent_folder
-        label: Path of the data folder
-        expression: "'/app/dist/persistent'"
-        required: true
         hide: true
+        label: globals
+        name: globals
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','')"    
+
       - type: expression
-        name: mysql_credential
-        expression: "'__self__'"
-        label: Credential to connect to database
+        name: aiqum
+        expression: "'aiqum.demo.netapp.com'" 
+        label: aiqum
         asCredential: true
-        required: true
-        hide: true
-  - name: Cleanup Ansibleforms Jobs
-    help: |
-      This form starts the `ansibleforms_job_cleanup.yaml` playbook
+        hide: true 
 
-      It will remove all ansible job logs
-    roles:
-      - admin
-    description: This will cleanup all ansible job logs.
-    icon: trash
-    categories:
-      - Demo
-      - Ansible
-      - Maintenance
-    tileClass: has-background-danger-light
-    playbook: ansibleforms_job_cleanup.yaml
-    type: ansible
-    fields:
+      - type: query
+        name: service
+        label: Service
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','[.services[] | ({name} + {shortname}) ]')"
+        columns:
+        - name
+        default: __auto__
+
       - type: expression
-        name: mysql_credential
-        expression: "'__self__'"
-        label: Credential to connect to database
-        asCredential: true
-        required: true
         hide: true
+        label: company_jq
+        name: company_jq
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','[(.services[] | select (.name==\"$(service.name)\")|.combinations)[]|{name:.company}]|unique')"          
+
+      - type: query
+        name: company
+        label: Company
+        expression: "JSON.parse('$(company_jq)')"
+        columns:
+        - name
+        required: true
+        runLocal: true
+        default: __auto__
+
+      - type: expression
+        label: environment_jq
+        name: environment_jq
+        hide: true 
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','[(.services[] | select (.name==\"$(service.name)\")|.combinations)[]| select(.company==\"$(company.name)\")|{name: .environment}]|unique')"
+
+      - type: query
+        name: environment
+        label: Environment
+        expression: "JSON.parse('$(environment_jq)')"
+        columns:
+        - name
+        required: true
+        runLocal: true
+        default: __auto__     
+
+      - type: expression
+        label: location_jq
+        name: location_jq
+        hide: true 
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','[(.services[] | select (.name==\"$(service.name)\")|.combinations)[]| select(.company==\"$(company.name)\" and .environment==\"$(environment.name)\")|{name: .location}]|unique')"
+
+      - type: query
+        name: location
+        label: Location
+        expression: "JSON.parse('$(location_jq.name)')"
+        columns:
+        - name
+        required: true
+        runLocal: true
+        default: __auto__  
+
+      - type: expression
+        name: aggr_filter_jq 
+        label: aggr_filter_jq
+        hide: true
+        expression: "fn.fnReadYamlFile('/app/dist/persistent/globals.yaml','.services[] | select (.name==\"$(service.name)\")|.combinations[]| select(.company==\"$(company.name)\" and .environment==\"$(environment.name)\" and .location==\"$(location.name)\")|.copies[]|select(.type==\"production\")|.clusters[]|keys|join(\"%7C\")')"
+
+
+      - type: expression
+        name: cluster_aggr_jq 
+        label: cluster_aggr_jq
+        hide: true
+        expression: "fn.fnRestBasic('get','https://'+'$(aiqum)'+'/api/datacenter/storage/aggregates?state=online&cluster.name=$(aggr_filter_jq)','','AIQUM','def gb:tostring|[while(length>0;.[:-3])|.[-3:]]|reverse|join(\",\")+\"GB\";def roundit: .*100.0 + 0.5|floor/100.0;[.records[]|{Resource: (.cluster.name+\" : \"+.name)}+{Aggregate: .name}+{Cluster: .cluster.name}+{Node: .node.name}+{Size: (.space.block_storage.size/1024/1024/1024)|round|gb}+{Available: (.space.block_storage.available/1024/1024/1024)|round|gb}+{Perf: (((.performance_capacity.used*100)|roundit|tostring)+\"%\")}+{Type: .type}]','','')"
+
+      - type: query
+        name: prod
+        label: Production Copy
+        expression: "JSON.parse('$(cluster_aggr_jq)')"
+        columns:
+        - Resource
+        - Aggregate
+        - Cluster
+        - Node
+        - Size
+        - Available
+        - Perf
+        - Type
+        required: true
+        runLocal: true
+        default: __auto__  
